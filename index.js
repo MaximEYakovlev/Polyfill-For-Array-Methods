@@ -1,5 +1,11 @@
 if (!Array.prototype.map) {
     Array.prototype.map = function (callback) {
+        if (!this instanceof Array) {
+            throw new TypeError('does not belong to the Array class')
+        }
+        if (typeof callback !== 'function') {
+            throw new TypeError(`${callback} is not a function`)
+        }
         const arr = []
         for (let i = 0; i < this.length; i++) {
             arr.push(callback(this[i], i, this))
